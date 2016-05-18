@@ -1,41 +1,237 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+    <title>IOC Container im Vergleich</title>
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/white.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement( 'link' );
 			link.rel = 'stylesheet';
 			link.type = 'text/css';
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>
-					<h1>IOC Container im Vergleich</h1>
-				</section>
-				<section><h2>Überblick</h2></section>
-			</div>
-		</div>
+    </script>
+</head>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <h1>IOC Container im Vergleich</h1>
+            </section>
+            <section>
+                <h2>Überblick</h2>
+                <p class="fragment ">IOC/DI</p>
+                <p class="fragment ">Welche Container gibt es</p>
+                <p class="fragment ">Welchen Container wir wirklich verwenden sollten ;-)</p>
+                <p class="fragment ">Spring.net</p>
+                <p class="fragment ">DryIOC</p>
+                <p class="fragment ">Unity</p>
+            </section>
 
-		<script>
-			// More info https://github.com/hakimel/reveal.js#configuration
+            <section>
+                <h2>IOC/DI</h2>
+                <ul>
+                    <li class="fragment">IOC als allgemeiner Überbegriff für eine Umkehr der Verantwortlichkeiten im Programmablauf
+                        <ul>
+                            <li class="fragment">Programmablauf wird nicht durch Programm selbst gesteuert</li>
+                            <li class="fragment">Eingabe von Werten in Konsole vs. WPF Anwendung</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">DI - Dependency Injection als ein ein kleiner Teil von IOC
+                        <ul>
+                            <li class="fragment">Einfügen von Abhängigkeiten in eine Komponente damit diese ihre FUnktion erfüllen kann.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Welche DI/IOC Container gibt es</h2>
+                <ul>
+                    <li>Spring.net</li>
+                    <li>Castle Windsor</li>
+                    <li>DryIoc</li>
+                    <li>Ninject</li>
+                    <li>Structure Map</li>
+                    <li>Unity Container</li>
+                    <li>Simple IOC</li>
+                    <li>AutoFac</li>
+                    <li>Caliburn Micro</li>
+                    <li>TinyIoc</li>
+                    <li>(MEF)</li>
+                    <li>...</li>
+                </ul>
+            </section>
+
+            <section>
+                <section>
+                    <h2>Welchen Container wir wirklich verwenden sollten ;-)</h2>
+                </section>
+                <section>
+                    Frage 1: Welche Container Funktionalitäten benötige ich in der aktuellen Komponente?
+                </section>
+                <section>
+                    Frage 2: Welcher Container liefert die benötigten Funktionalitäten?
+                </section>
+                <section>
+                    <h2>Beispiel 1 - Desktopanwendung mit DB Zugriff</h2>
+                    <ul>
+                        <li>Benötige Funktionen außer DI</li>
+                        <ul>
+                            <li class="fragment">NHibernate</li>
+                            <li class="fragment">Transaction Handling</li>
+                            <li class="fragment">AOP bzw. Querschnittsfunktionen</li>
+                        </ul>
+                    </ul>
+                    <p class="fragment">spring.net oder einen anderen Container mit cooler ORM Integration</p>
+                </section>
+                <section>
+                    <h2>Beispiel 2 - Simpler Microservice ohne DB Zugriff und UI</h2>
+                    <ul>
+                        <li>Benötigte Fuktionen außer DI
+                            <ul>
+                                <li class="fragment">MVC Integration</li>
+                                <li class="fragment">evtl. bissl Querschnittsfunktionalität</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p class="fragment">unity, autofac, ... auf jeden Fall kein Schwergewicht mit 1001 Funktion, die nicht benötigt wird.</p>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h2>Spring.net</h2>
+                    <pre><code class="xml" data-trim contenteditable>
+  &lt;object id="ContractorCoachingViewModel"
+          type="Com.QueoFlow.TrackingtoolLogistik.WPF.Ui.UserControls.ContractorCoaching.ViewModels.ContractorCoachingViewModel, TrackingtoolLogistik.WPF"
+          singleton="false"&gt;
+    &lt;property name="ProjectService"
+              ref="projectService" /&gt;
+    &lt;property name="OrderImportService"
+              ref="orderImportService" /&gt;
+    &lt;property name="ProjectReportService"
+              ref="projectReportService" /&gt;
+    &lt;property name="SpecialPeriodService"
+              ref="specialPeriodService" /&gt;
+</code></pre>
+                    <p class="fragment">Unser bisheriger Standardcontainer mit sehr guter NHibernate Integration und Transaction Management sowie
+                        sehr umfargreichen AOP Möglichkeiten.</p>
+                </section>
+                <section>
+                    <h2>Vorteile</h2>
+                    <ul>
+                        <li>Sehr gute Verknüpfung von NHibernate und den Transactions</li>
+                        <li>Gewachsene interne Bibliotheken zur Nutzung in Tests, Basisklassen usw.</li>
+                        <li>Gute Integration von Konfigurationsmöglichkeiten wie Properties Dateien</li>
+                        <li>XML Konfiguration und somit z.B. Möglichkeiten einzelne Werte über Platzhalter zu injecten</li>
+                        <li>Tonnenweise Doku</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Nachteile</h2>
+                    <ul>
+                        <li>Standardmäßig über XML Konfiguriert und somit schlecht wartbar</li>
+                        <li>Träges Startverhalten</li>
+                        <li>Teils schlechte Performance beim Auflösen vieler Elemente</li>
+                        <li>Gefühlt keine Relevanz in der Menge der IOC Container</li>
+                        <li>Wahrscheinlich keine Weiterentwicklung außerhalb des normalen .net Frameworkes. Also kein Xamarin,
+                            .netCore usw.</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>DryIoc</h2>
+                    <pre><code class="cs" data-trim contenteditable>
+var c = new Container();
+c.Register&lt;IClient, SomeClient&gt;();
+c.Register&lt;IService, SomeService&gt;();
+
+// somewhere else
+IClient client = c.Resolve&lt;IClient&gt;();
+</code></pre>
+                    <p class="fragment">Ein sehr schneller Container, der teilweise in WPF Anwendungen eingesetzt wird, wenn keine weitere DB
+                        Anbindung notwendig ist und nur simples DI genötigt wird.</p>
+                </section>
+                <section>
+                    <h2>Vorteile</h2>
+                    <ul>
+                        <li>Sehr schnelle Initialisierung und Auflösung</li>
+                        <li>Einfache Konfiguration im Code</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Nachteile</h2>
+                    <ul>
+                        <li>Keine einfach Möglichkeit z.B. Konfigurationswerte zu injecten.</li>
+                        <li>Beim letzten Test noch keine finale WebApi Unterstützung</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Unity</h2>
+                    <pre><code class="cs" data-trim contenteditable>
+container.RegisterTypes(
+    AllClasses.FromAssemblies(typeof(UnityConfig).Assembly),
+    WithMappings.FromMatchingInterface,
+    WithName.Default,
+    WithLifetime.Transient);
+
+container.AddNewExtension&lt;Log4NetExtension&gt;();
+
+/* resolve */                
+IBaseUrlSettings baseUrlSettings = container.Resolve&lt;IBaseUrlSettings&gt;();
+</code></pre>
+                    <p class="fragment">Etwas schwergewichtigerer Container von MS der in diversen WebApi und WPF Anwendungen eingesetzt, wenn
+                        keine weitere DB Anbindung benötigt wird.</p>
+                </section>
+                <section>
+                    <h2>Vorteile</h2>
+                    <ul>
+                        <li>Schnelle Initialisierung und Auflösung</li>
+                        <li>Einfache Konfiguration im Code</li>
+                        <li>AOP möglich
+                            <pre><code class="cs" data-trim contenteditable>
+[AppSettingsDependency("ReadingAnalysis.DecimalPlaces")]
+public int DecimalPlaces { get; set; }
+</code></pre>
+                        </li>
+                        <li>Integration in Web Api</li>
+                        <li>Konfiguration in XML möglich, aber nicht Standard</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Nachteile</h2>
+                    <ul>
+                        <li>Keine einfach Möglichkeit z.B. Konfigurationswerte zu injecten.</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <h1>Alles klar?</h1>
+                <p>Wiki Stichwort: DI-/IOC Container</p>
+            </section>
+        </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+        // More info https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
 				history: true,
 
@@ -47,6 +243,7 @@
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
 			});
-		</script>
-	</body>
+    </script>
+</body>
+
 </html>
