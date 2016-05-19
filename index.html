@@ -40,20 +40,37 @@
             </section>
 
             <section>
-                <h2>IOC/DI</h2>
-                <ul>
-                    <li class="fragment">IOC als allgemeiner Überbegriff für eine Umkehr der Verantwortlichkeiten im Programmablauf
-                        <ul>
-                            <li class="fragment">Programmablauf wird nicht durch Programm selbst gesteuert</li>
-                            <li class="fragment">Eingabe von Werten in Konsole vs. WPF Anwendung</li>
-                        </ul>
-                    </li>
-                    <li class="fragment">DI - Dependency Injection als ein ein kleiner Teil von IOC
-                        <ul>
-                            <li class="fragment">Einfügen von Abhängigkeiten in eine Komponente damit diese ihre FUnktion erfüllen kann.</li>
-                        </ul>
-                    </li>
-                </ul>
+                <section>
+                    <h2>IOC/DI</h2>
+                    <ul>
+                        <li class="fragment">IOC als allgemeiner Überbegriff für eine Umkehr der Verantwortlichkeiten im Programmablauf
+                            <ul>
+                                <li class="fragment">Programmablauf wird nicht durch Programm selbst gesteuert</li>
+                                <li class="fragment">Eingabe von Werten in Konsole vs. WPF Anwendung</li>
+                            </ul>
+                        </li>
+                        <li class="fragment">DI - Dependency Injection als ein ein kleiner Teil von IOC
+                            <ul>
+                                <li class="fragment">Einfügen von Abhängigkeiten in eine Komponente damit diese ihre Funktion erfüllen kann.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Best Practices</h2>
+                    <ul>
+                        <li class="fragment">Konstruktor Injection</li>
+                        <li class="fragment">Composition Root
+                            <ul>
+                                <li class="fragment">d.h. keine Verwendung des Containers außerhalb Composition Root
+                                    <ul>
+                                        <li class="fragment">Bsp. Problem: ViewCommands</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
             </section>
 
             <section>
@@ -77,6 +94,7 @@
             <section>
                 <section>
                     <h2>Welchen Container wir wirklich verwenden sollten ;-)</h2>
+                    <h3 class="fragment">depends on ...</h3>
                 </section>
                 <section>
                     Frage 1: Welche Container Funktionalitäten benötige ich in der aktuellen Komponente?
@@ -132,7 +150,7 @@
                 <section>
                     <h2>Vorteile</h2>
                     <ul>
-                        <li>Sehr gute Verknüpfung von NHibernate und den Transactions</li>
+                        <li>Sehr gute Verknüpfung von NHibernate und Transactions</li>
                         <li>Gewachsene interne Bibliotheken zur Nutzung in Tests, Basisklassen usw.</li>
                         <li>Gute Integration von Konfigurationsmöglichkeiten wie Properties Dateien</li>
                         <li>XML Konfiguration und somit z.B. Möglichkeiten einzelne Werte über Platzhalter zu injecten</li>
