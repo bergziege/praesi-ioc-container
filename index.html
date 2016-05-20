@@ -205,13 +205,17 @@ IClient client = c.Resolve&lt;IClient&gt;();
 container.RegisterTypes(
     AllClasses.FromAssemblies(typeof(UnityConfig).Assembly),
     WithMappings.FromMatchingInterface,
-    WithName.Default,
-    WithLifetime.Transient);
+    WithName.Default, WithLifetime.Transient);
 
 container.AddNewExtension&lt;Log4NetExtension&gt;();
 
-/* resolve */                
+/* resolve Varianten*/                
 IBaseUrlSettings baseUrlSettings = container.Resolve&lt;IBaseUrlSettings&gt;();
+
+public SomeClass(IBaseUrlSettings baseUrlSettings){...}
+
+[Dependency]
+public ILog Logger { set; protected get; }
 </code></pre>
                     <p class="fragment">Etwas schwergewichtigerer Container von MS der in diversen WebApi und WPF Anwendungen eingesetzt, wenn
                         keine weitere DB Anbindung benötigt wird.</p>
