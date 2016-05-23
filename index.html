@@ -131,7 +131,7 @@
             <section>
                 <section>
                     <h2>Spring.net</h2>
-                    <pre><code class="xml" data-trim contenteditable>
+                    <pre><code class="xml" data-trim>
   &lt;object id="ContractorCoachingViewModel"
           type="Com.QueoFlow.TrackingtoolLogistik.WPF.Ui.UserControls.ContractorCoaching.ViewModels.ContractorCoachingViewModel, TrackingtoolLogistik.WPF"
           singleton="false"&gt;
@@ -144,6 +144,22 @@
     &lt;property name="SpecialPeriodService"
               ref="specialPeriodService" /&gt;
 </code></pre>
+                </section>
+                <section>
+                    <h3>Instanzen über Namen erstellen</h3>
+                    <pre><code class="cs" data-trim>
+public T Create&lt;T&gt;(params object[] arguments) where T : class {
+    IApplicationContext context = ContextRegistry.GetContext();
+    string typeName = typeof(T).Name;
+    typeName = typeName.Substring(0, 1).ToLower() + typeName.Substring(1);
+    T viewModel;
+    if (arguments.Length &gt; 0) {
+        viewModel = context.GetObject(typeName, arguments) as T;
+    } else {
+        viewModel = context.GetObject(typeName) as T;
+    }
+    return viewModel;
+}</code></pre>
                     <p class="fragment">Unser bisheriger Standardcontainer mit sehr guter NHibernate Integration und Transaction Management sowie
                         sehr umfargreichen AOP Möglichkeiten.</p>
                 </section>
