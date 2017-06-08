@@ -218,11 +218,18 @@ IClient client = c.Resolve&lt;IClient&gt;();
                 <section>
                     <h2>Unity</h2>
                     <pre><code class="cs" data-trim contenteditable>
+/* Alle in der Assembly, die ein gleichnamiges Interface haben als transient (neue Instanz pro resolve) 
+ * https://msdn.microsoft.com/en-us/library/ff660872(v=pandp.20).aspx
+ */
 container.RegisterTypes(
     AllClasses.FromAssemblies(typeof(UnityConfig).Assembly),
     WithMappings.FromMatchingInterface,
     WithName.Default, WithLifetime.Transient);
 
+/* Nur einen einzelnen Typ inkl. Interface registrieren */
+container.RegisterType&lt;IMainViewModel, MainViewModel&gt;();
+
+/* Extension registrieren, die einen getypten Log4Net Logger injeziert. */
 container.AddNewExtension&lt;Log4NetExtension&gt;();
 
 /* resolve Varianten*/                
