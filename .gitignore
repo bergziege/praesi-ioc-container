@@ -11,3 +11,7 @@ node_modules/
 .sass-cache
 css/reveal.min.css
 js/reveal.min.js
+Example.Console/UnityExample/.vs/
+Example.Console/UnityExample/UnityExample/bin/
+Example.Console/UnityExample/UnityExample/obj/
+Example.Console/UnityExample/packages/
