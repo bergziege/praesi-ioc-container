@@ -239,12 +239,14 @@ container.AddNewExtension&lt;Log4NetExtension&gt;();
                 <section>
                     <h2>Unity (2/2)</h2>
                     <pre><code class="cs" data-trim contenteditable>
-/* resolve Varianten*/                
-IBaseUrlSettings baseUrlSettings = 
+/* Resolve from container */                
+ISomeService someService = 
         container.Resolve&lt;ISomeService&gt;();
 
+/* Constructor injection */
 public SomeClass(ISomeService someService){...}
 
+/* Property injection */
 [Dependency]
 public ILog Logger { set; protected get; }
 </code></pre>
