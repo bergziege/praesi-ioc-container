@@ -13,8 +13,8 @@ namespace UnityExample {
             UnityContainer container = new UnityContainer();
 
             /* Register Types with container */
-            //RegisterExplicit(container);
-            RegisterByRules(container);
+            RegisterExplicit(container);
+            //RegisterByRules(container);
 
             /* Get the registered implementation for IConsoleService */
             IConsoleService consoleService = container.Resolve<IConsoleService>();
@@ -31,12 +31,17 @@ namespace UnityExample {
                 AllClasses.FromAssemblies(typeof(Program).Assembly),
                 WithMappings.FromMatchingInterface,
                 WithName.Default,
-                WithLifetime.Transient);
+                WithLifetime.ContainerControlled);
         }
 
-        private static void RegisterExplicit(UnityContainer container) {
-            container.RegisterType<IConsoleDao, ConsoleDao>();
-            container.RegisterType<IConsoleService, ConsoleService>();
+        public static void RegisterExplicit(UnityContainer container)
+        {
+            container.RegisterType<IConsoleDao, ConsoleDao>(new ContainerControlledLifetimeManager());
+            /* ers (IConsoleDao, String). */
+            container.RegisterType<IConsoleService, ConsoleService>(new ContainerControlledLifetimeManager(),
+                new InjectionConstructor(
+    typeof(IConsoleDao),
+    new InjectionParameter<string>("test")));
         }
     }
 }
