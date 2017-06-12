@@ -218,7 +218,8 @@ IClient client = c.Resolve&lt;IClient&gt;();
                 <section>
                     <h2>Unity</h2>
                     <pre><code class="cs" data-trim contenteditable>
-/* Alle in der Assembly, die ein gleichnamiges Interface haben als transient (neue Instanz pro resolve) 
+/* Alle in der Assembly, die ein gleichnamiges Interface haben
+ * als transient (neue Instanz pro resolve) 
  * https://msdn.microsoft.com/en-us/library/ff660872(v=pandp.20).aspx
  */
 container.RegisterTypes(
@@ -229,11 +230,13 @@ container.RegisterTypes(
 /* Nur einen einzelnen Typ inkl. Interface registrieren */
 container.RegisterType&lt;IMainViewModel, MainViewModel&gt;();
 
-/* Extension registrieren, die einen getypten Log4Net Logger injeziert. */
+/* Extension registrieren, die einen getypten 
+ * Log4Net Logger injiziert. */
 container.AddNewExtension&lt;Log4NetExtension&gt;();
 
 /* resolve Varianten*/                
-IBaseUrlSettings baseUrlSettings = container.Resolve&lt;IBaseUrlSettings&gt;();
+IBaseUrlSettings baseUrlSettings = 
+        container.Resolve&lt;IBaseUrlSettings&gt;();
 
 public SomeClass(IBaseUrlSettings baseUrlSettings){...}
 
