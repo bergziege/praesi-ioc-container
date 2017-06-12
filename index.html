@@ -216,7 +216,7 @@ IClient client = c.Resolve&lt;IClient&gt;();
             </section>
             <section>
                 <section>
-                    <h2>Unity</h2>
+                    <h2>Unity (1/2)</h2>
                     <pre><code class="cs" data-trim contenteditable>
 /* Alle in der Assembly, die ein gleichnamiges Interface haben
  * als transient (neue Instanz pro resolve) 
@@ -233,7 +233,13 @@ container.RegisterType&lt;IMainViewModel, MainViewModel&gt;();
 /* Extension registrieren, die einen getypten 
  * Log4Net Logger injiziert. */
 container.AddNewExtension&lt;Log4NetExtension&gt;();
-
+</code></pre>
+                    <p class="fragment">Etwas schwergewichtigerer Container von MS der in diversen WebApi und WPF Anwendungen eingesetzt, wenn
+                        keine weitere DB Anbindung benötigt wird.</p>
+                </section>
+                <section>
+                    <h2>Unity (2/2)</h2>
+                    <pre><code class="cs" data-trim contenteditable>
 /* resolve Varianten*/                
 IBaseUrlSettings baseUrlSettings = 
         container.Resolve&lt;IBaseUrlSettings&gt;();
@@ -243,8 +249,6 @@ public SomeClass(IBaseUrlSettings baseUrlSettings){...}
 [Dependency]
 public ILog Logger { set; protected get; }
 </code></pre>
-                    <p class="fragment">Etwas schwergewichtigerer Container von MS der in diversen WebApi und WPF Anwendungen eingesetzt, wenn
-                        keine weitere DB Anbindung benötigt wird.</p>
                 </section>
                 <section>
                     <h2>Vorteile</h2>
