@@ -230,8 +230,7 @@ container.RegisterTypes(
 /* Nur einen einzelnen Typ inkl. Interface registrieren */
 container.RegisterType&lt;IMainViewModel, MainViewModel&gt;();
 
-/* Extension registrieren, die einen getypten 
- * Log4Net Logger injiziert. */
+/* https://github.com/roblevine/UnityLog4NetExtension */
 container.AddNewExtension&lt;Log4NetExtension&gt;();
 </code></pre>
                     <p class="fragment">Etwas schwergewichtigerer Container von MS der in diversen WebApi und WPF Anwendungen eingesetzt, wenn
@@ -242,9 +241,9 @@ container.AddNewExtension&lt;Log4NetExtension&gt;();
                     <pre><code class="cs" data-trim contenteditable>
 /* resolve Varianten*/                
 IBaseUrlSettings baseUrlSettings = 
-        container.Resolve&lt;IBaseUrlSettings&gt;();
+        container.Resolve&lt;ISomeService&gt;();
 
-public SomeClass(IBaseUrlSettings baseUrlSettings){...}
+public SomeClass(ISomeService someService){...}
 
 [Dependency]
 public ILog Logger { set; protected get; }
